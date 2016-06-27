@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
+  root 'users#new'
+
   resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
 
   resources :follows, only: [:create, :destroy]
 
-  resources :sessions, only: [:create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
 
-  get 'stocks/index'
+  delete 'sessions' => 'sessions#destroy'
+
+  get 'stocks' => 'stocks#index'
 
   get 'stocks/search'
 
