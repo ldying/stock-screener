@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :stocks, through: :follow
+  has_many :follows
+  has_many :stocks, through: :follows
  
 
 

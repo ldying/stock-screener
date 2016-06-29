@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627210525) do
+ActiveRecord::Schema.define(version: 20160628235748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,48 @@ ActiveRecord::Schema.define(version: 20160627210525) do
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
-    t.string   "exchange"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "AverageDailyVolume"
+    t.float    "BookValue"
+    t.string   "Change"
+    t.float    "DividendShare"
+    t.date     "LastTradeDate"
+    t.float    "EarningsShare"
+    t.float    "EPSEstimateCurrentYear"
+    t.float    "EPSEstimateNextYear"
+    t.float    "EPSEstimateNextQuarter"
+    t.float    "DaysLow"
+    t.float    "DaysHigh"
+    t.float    "YearLow"
+    t.float    "YearHigh"
+    t.string   "MarketCapitalization"
+    t.string   "EBITDA"
+    t.float    "ChangeFromYearLow"
+    t.string   "PercentChangeFromYearLow"
+    t.float    "ChangeFromYearHigh"
+    t.string   "PercebtChangeFromYearHigh"
+    t.float    "LastTradePriceOnly"
+    t.float    "FiftydayMovingAverage"
+    t.float    "TwoHundreddayMovingAverage"
+    t.float    "ChangeFromTwoHundreddayMovingAverage"
+    t.string   "PercentChangeFromTwoHundreddayMovingAverage"
+    t.float    "ChangeFromFiftydayMovingAverage"
+    t.string   "PercentChangeFromFiftydayMovingAverage"
+    t.string   "Name"
+    t.float    "Open"
+    t.float    "PreviousClose"
+    t.float    "PriceSales"
+    t.float    "PriceBook"
+    t.float    "PERatio"
+    t.float    "PEGRatio"
+    t.float    "PriceEPSEstimateCurrentYear"
+    t.float    "PriceEPSEstimateNextYear"
+    t.float    "OneyrTargetPrice"
+    t.integer  "Volume"
+    t.string   "YearRange"
+    t.float    "DividendYield"
+    t.string   "PercentChange"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "users", force: :cascade do |t|
