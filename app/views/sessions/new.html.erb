@@ -2,6 +2,10 @@
 	<div class="columns ten">
 	<h3>Login!</h3>
 
+	<% if flash[:errors] %>
+		<%= flash[:errors] %>
+	<% end %>
+
 	<form action="/sessions" method="post">
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
