@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'stocks/:id' => 'stocks#show'
 
   get 'screener' => 'stocks#screen'
+  get '/search' => 'stocks#search'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
