@@ -10,9 +10,17 @@ Rails.application.routes.draw do
 
   delete 'sessions' => 'sessions#destroy'
 
-  get 'stocks' => 'stocks#index'
+  post '/get_all_stocks' => 'stocks#create_all'
+  post '/update_all_stocks' => 'stocks#update_all'
 
   get 'stocks/search'
+  get 'stocks/secret'
+  
+  get 'stocks' => 'stocks#index'
+  get 'stocks/:id' => 'stocks#show'
+
+  get 'screener' => 'stocks#screen'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

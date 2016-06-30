@@ -3,7 +3,7 @@
 	<h3>Login!</h3>
 
 	<% if flash[:errors] %>
-		<%= flash[:errors] %>
+		<p style="color:red;"><%= flash[:errors] %></p>
 	<% end %>
 
 	<form action="/sessions" method="post">
@@ -17,6 +17,6 @@
 
 		<button type="submit">Login</button>
 	</form>
-	<a href="/users/new">Not Register?</a>
+	<a href="/users/new">Not Registered?</a>
 	</div>
 </div>

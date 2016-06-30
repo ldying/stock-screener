@@ -1,44 +1,47 @@
-<div class="row">
-	<div class="columns nine">
-		<h2>Welcome <%= @user.first_name %>! </h2>
-	</div>
-	<div class="columns three">
-		<a href="/sessions" data-method="delete">Logout</a>   
-	</div>
-</div>
-
 
 <div class="row">
-	<div class="columns three">
-		<a href="">Stock Screener</a><br>
-		<a href="">Watch List</a><br>
-		<a href="">Edit Profile</a>
-	</div>
-
-	<div class="columns nine">
-		<h2> Stocks</h2>
+	<div class="columns twelve">
+		<h2 class="center-align">S&P 500 Stock List</h2>
 		<table>
 			<thead>
 				<tr>
 					<th>Symbol</th>
-					<th>Revenue</th>
-					<th>expenses</th>
-					<th>profit</th>
-					<th>P/E</th>
-					<th>volume</th>
-					<th>action</th>
+					<th>Price</th>
+					<th>Change</th>
+					<th>Day's Range</th>
+					<th>Volume</th>
+					<th>Year's Range</th>
+					<th>Market Cap</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
+			<% @stocks.each do  |stock|%>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><button>follow</button></td>
+					<td><a href="/stocks/<%= stock.id %>"><%= stock.symbol%></a></td>
+					<td><%= stock.LastTradePriceOnly%></td>
+					<td><%= stock.Change%> &nbsp;&nbsp;/&nbsp;&nbsp;<%= stock.PercentChange%></td>
+					<td><%= stock.DaysLow%> - <%= stock.DaysHigh %></td>
+					<td><%= stock.Volume%></td>
+					<td><%= stock.YearRange %></td>
+					<td><%= stock.MarketCapitalization%></td>
+					<td>
+						<% if stock.users.include? current_user %>
+							<form action="/follows/<%= stock.follows.where(user: current_user).first.id %>" method="post">
+								<input type="hidden" name="_method" value="delete">
+								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+								<input type="submit" class="button-danger" value="Unfollow">
+							</form>
+						<% else %>
+							<form action="/follows" method="post">
+								<input type="hidden" name="stock_id" value="<%= stock.id %>">
+								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+								<input type="submit" class="button-primary" name="" value="Follow">
+							</form>
+						<% end %>
+					</td>
 				</tr>
+			<% end %>
 			</tbody>
 		</table>
 	</div>

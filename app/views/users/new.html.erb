@@ -1,9 +1,5 @@
 <h1>Welcome!</h1>
-<a href="/sessions/new">Already Register?</a>
-
-<% if flash[:errors] %>
-    <p><%= flash[:errors] %></p>
-<% end %>
+<a href="/sessions/new">Already Registered?</a>
 
 <div class="row">
 	<div class="columns ten center-align">
@@ -16,7 +12,7 @@
 
 			<% if flash[:first_name] %>
 				<br>
-				<%= flash[:first_name]%>
+				<p style="color:red;"><%= flash[:first_name]%></p>
 			<% end %>
 
 			<label>Last Name:</label>
@@ -24,7 +20,7 @@
 
 			<% if flash[:last_name] %>
 				<br>
-				<%= flash[:last_name]%>
+				<p style="color:red;"><%= flash[:last_name]%></p>
 			<% end %>
 
 			<label>Email:</label>
@@ -32,7 +28,7 @@
 
 			<% if flash[:email] %>
 				<br>
-				<%= flash[:email]%>
+				<p style="color:red;"><%= flash[:email]%></p>
 			<% end %>
 
 			<label>Password:</label>
@@ -40,7 +36,7 @@
 
 			<% if flash[:password] %>
 				<br>
-				<%= flash[:password]%>
+				<p style="color:red;"><%= flash[:password]%></p>
 			<% end %>
 
 			<label>Confirm Password:</label>

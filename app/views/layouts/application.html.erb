@@ -8,6 +8,25 @@
 </head>
 <body>
 <div class="container">
+	<div class="row">
+		<div class="columns six">
+			<h3>Welcome, <%= current_user.first_name %>! </h3>
+		</div>
+		<div class="columns six ">
+
+			<a href="/stocks">All Stocks</a> | 
+			<a href="/screener">Stock Screener</a> | 
+			<a href="/users/<%=current_user.id%>">Watch List</a> | 
+			<a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+			<a href="/sessions" data-method="delete">Logout</a>   
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="columns three">
+		</div>
+	</div>
 <%= yield %>
 </div>
 </body>
