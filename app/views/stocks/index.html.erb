@@ -1,4 +1,15 @@
+<div class="row">
+		<div class="columns five">
+			<h3>Welcome, <%= current_user.first_name %>! </h3>
+		</div>
+		<div class="columns seven ">
 
+			<i class="fa fa-list" aria-hidden="true"></i> <a href="/stocks">All Stocks</a> | 
+			<i class="fa fa-search" aria-hidden="true"></i> <a href="/screener">Stock Screener</a> | 
+			<i class="fa fa-eye" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>">Watch List</a> | <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+			<i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/sessions" data-method="delete">Logout</a>   
+		</div>
+	</div>
 <div class="row">
 	<div class="columns twelve">
 		<h2 class="center-align">S&P 500 Stock List</h2>
@@ -18,9 +29,15 @@
 			<tbody>
 			<% @stocks.each do  |stock|%>
 				<tr>
-					<td><a href="/stocks/<%= stock.id %>"><%= stock.symbol%></a></td>
+					<td><i class="fa fa-area-chart" aria-hidden="true"></i> <a href="/stocks/<%= stock.id %>" data-no-turbolink="true"><%= stock.symbol%></a></td>
 					<td><%= stock.LastTradePriceOnly%></td>
-					<td><%= stock.Change%> &nbsp;&nbsp;/&nbsp;&nbsp;<%= stock.PercentChange%></td>
+					<td
+					<% if stock.Change and stock.Change[0] == "+" %>
+						style="color:green;"
+						<% else %>
+						style="color:red;"
+						<% end %>
+					><%= stock.Change%> &nbsp;&nbsp;/&nbsp;&nbsp;<%= stock.PercentChange%></td>
 					<td><%= stock.DaysLow%> - <%= stock.DaysHigh %></td>
 					<td><%= stock.Volume%></td>
 					<td><%= stock.YearRange %></td>
@@ -30,13 +47,13 @@
 							<form action="/follows/<%= stock.follows.where(user: current_user).first.id %>" method="post">
 								<input type="hidden" name="_method" value="delete">
 								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-								<input type="submit" class="button-danger" value="Unfollow">
+								<button type="submit" class="button-danger" value=""><i class="fa fa-eye-slash" aria-hidden="true"></i> Unfollow</button>
 							</form>
 						<% else %>
 							<form action="/follows" method="post">
 								<input type="hidden" name="stock_id" value="<%= stock.id %>">
 								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-								<input type="submit" class="button-primary" name="" value="Follow">
+								<button type="submit" class="button-primary" value=""><i class="fa fa-eye" aria-hidden="true"></i> Follow</button>
 							</form>
 						<% end %>
 					</td>

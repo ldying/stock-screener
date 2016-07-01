@@ -1,4 +1,101 @@
+<div class="row">
+    <div class="columns five">
+      <h3> </h3>
+    </div>
+    <div class="columns seven ">
 
-<h2><%=@stock.Name %> (<%=@stock.symbol %>)</h2>
+      <i class="fa fa-list" aria-hidden="true"></i> <a href="/stocks">All Stocks</a> | 
+      <i class="fa fa-search" aria-hidden="true"></i> <a href="/screener">Stock Screener</a> | 
+      <i class="fa fa-eye" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>">Watch List</a> | <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+      <i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/sessions" data-method="delete">Logout</a>   
+    </div>
+</div>
+<h3><%=@stock.Name %> (<%=@stock.symbol %>)&nbsp;&nbsp;<span
+      <% if @stock.Change and @stock.Change[0] == "+" %>
+            style="color:green; font-size: 60%;"
+            <% else %>
+            style="color:red; font-size: 60%;"
+            <% end %>
+    >
+    <%= @stock.Change%> &nbsp;&nbsp;/&nbsp;&nbsp;<%= @stock.PercentChange%></span></h3>
+<div class="row">
+  <div class="columns twelve">
+<!-- TradingView Widget BEGIN -->
+    <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+    <script type="text/javascript">
+      new TradingView.widget({
+        "width": 980,
+        "height": 500,
+        "symbol": "<%=@stock.symbol %>",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "Grey",
+        "style": "3",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "allow_symbol_change": true,
+        "hideideas": true,
+        "show_popup_button": true,
+        "popup_width": "1000",
+        "popup_height": "550",
+        "no_referral_id": true
+      });
+    </script>
+<!-- TradingView Widget END -->
+    </div>
+</div>
 
-<a href="http://finviz.com/quote.ashx?t=<%=@stock.symbol %>">Click Here For Chart</a>
+<div class="row" id="stockdata">
+<hr>
+  <div class="columns three">
+    <% if @stock.users.include? current_user %>
+              <form action="/follows/<%= @stock.follows.where(user: current_user).first.id %>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <button type="submit" class="button-danger" value=""><i class="fa fa-eye-slash" aria-hidden="true"></i> Unfollow</button>
+              </form>
+            <% else %>
+              <form action="/follows" method="post">
+                <input type="hidden" name="stock_id" value="<%= @stock.id %>">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <button type="submit" class="button-primary" value=""><i class="fa fa-eye" aria-hidden="true"></i> Follow</button>
+              </form>
+            <% end %>
+  </div>
+  <div class="columns four">
+    <p>Day's Range: <%= @stock.DaysLow%> - <%= @stock.DaysHigh %></p>
+    <p>Year's Range: <%= @stock.YearRange %></p>
+    <p>Open: <%= @stock.Open %></p>
+    <p>Volume: <%= @stock.Volume %></p>
+    <p>Market Cap: <%= @stock.MarketCapitalization %></p>
+    <p>P/E Ratio: <%= @stock.PERatio %></p>
+
+  </div>
+  <div class="columns four">
+    <p>Dividend Yield: <%= @stock.DividendYield %></p>
+    <p>Earnings Per Share: <%= @stock.EarningsShare %></p>
+    <p>50 Day Moving Average: <%= @stock.FiftydayMovingAverage %></p>
+    <p>%Change from 50d MA: <span
+      <% if @stock.Change and @stock.Change[0] == "+" %>
+            style="color:green;"
+            <% else %>
+            style="color:red;"
+            <% end %>
+    >
+    <%= @stock.PercentChangeFromFiftydayMovingAverage %></span></p>
+    <p>200 Day Moving Average: <%= @stock.TwoHundreddayMovingAverage %></p>
+    <p>%Change from 200d MA: <span
+      <% if @stock.Change and @stock.Change[0] == "+" %>
+            style="color:green;"
+            <% else %>
+            style="color:red;"
+            <% end %>
+    >
+    <%= @stock.PercentChangeFromTwoHundreddayMovingAverage %></span></p>
+    
+  </div>
+</div>
+<hr>
+<br>
+<br>
+<br>

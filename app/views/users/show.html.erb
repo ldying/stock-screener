@@ -1,2 +1,58 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row">
+    <div class="columns five">
+       <h3><%= current_user.first_name %>'s Watch List! </h3> 
+    </div>
+    <div class="columns seven ">
+
+      <i class="fa fa-list" aria-hidden="true"></i> <a href="/stocks">All Stocks</a> | 
+      <i class="fa fa-search" aria-hidden="true"></i> <a href="/screener">Stock Screener</a> | 
+      <i class="fa fa-eye" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>">Watch List</a> | <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+      <i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/sessions" data-method="delete">Logout</a>   
+    </div>
+  </div>
+<div class="row">
+  <div class="columns twelve">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>Change</th>
+          <th>Day's Range</th>
+          <th>Volume</th>
+          <th>Year's Range</th>
+          <th>Market Cap</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @follows.each do  |s|%>
+        <tr>
+          <td> <i class="fa fa-area-chart" aria-hidden="true"></i> <a href="/stocks/<%= s.stock.id %>" data-no-turbolink="true"><%= s.stock.symbol%></a></td>
+          <td><%= s.stock.LastTradePriceOnly%></td>
+          <td
+          <% if s.stock.Change and s.stock.Change[0] == "+" %>
+            style="color:green;"
+            <% else %>
+            style="color:red;"
+            <% end %>
+          ><%= s.stock.Change%> &nbsp;&nbsp;/&nbsp;&nbsp;<%= s.stock.PercentChange%></td>
+          <td><%= s.stock.DaysLow%> - <%= s.stock.DaysHigh %></td>
+          <td><%= s.stock.Volume%></td>
+          <td><%= s.stock.YearRange %></td>
+          <td><%= s.stock.MarketCapitalization%></td>
+          <td>
+            <form action="/follows/<%= s.id%>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <button type="submit" class="button-danger" value=""><i class="fa fa-eye-slash" aria-hidden="true"></i> Unfollow</button>
+              </form>
+          </td>
+        </tr>
+     <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+

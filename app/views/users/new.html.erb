@@ -1,8 +1,7 @@
-<h1>Welcome!</h1>
-<a href="/sessions/new">Already Registered?</a>
+<h2 class="center-align"><%= image_tag("easystreet.png", :alt => "Dojo $treet") %></h2>
 
 <div class="row">
-	<div class="columns ten center-align">
+	<div class="columns ten">
 		<h3>Register</h3>
 
 		<form action="/users" method="post">
@@ -45,5 +44,6 @@
 			<button type="submit" class="button-primary">Register</button>
 		</form>
 
+		<a href="/sessions/new">Already Registered?</a>
 	</div>
 </div>

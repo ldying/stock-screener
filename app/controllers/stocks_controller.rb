@@ -4,18 +4,18 @@ require 'json'
 class StocksController < ApplicationController
   def index
   	@user = current_user
-    @stocks = Stock.all
+    @stocks = Stock.all.order(Volume: :desc)
   end
 
   def show
     @stock = Stock.find(params[:id])
   end
 
-  def secrete
+  def secret
   end
 
   def create_all 
-    response1 = HTTParty.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22MMM%22%2C%22ABT%22%2C%22ABBV%22%2C%22ACN%22%2C%22ATVI%22%2C%22AYI%22%2C%22ADBE%22%2C%22AAP%22%2C%22AES%22%2C%22AET%22%2C%22AFL%22%2C%22AMG%22%2C%22A%22%2C%22GAS%22%2C%22APD%22%2C%22AKAM%22%2C%22ALK%22%2C%22AA%22%2C%22AGN%22%2C%22ALXN%22%2C%22ALLE%22%2C%22ADS%22%2C%22ALL%22%2C%22GOOGL%22%2C%22GOOG%22%2C%22MO%22%2C%22AMZN%22%2C%22AEE%22%2C%22AAL%22%2C%22AEP%22%2C%22AXP%22%2C%22AIG%22%2C%22AMT%22%2C%22AWK%22%2C%22AMP%22%2C%22ABC%22%2C%22AME%22%2C%22AMGN%22%2C%22APH%22%2C%22APC%22%2C%22ADI%22%2C%22AON%22%2C%22APA%22%2C%22AIV%22%2C%22AAPL%22%2C%22AMAT%22%2C%22ADM%22%2C%22AJG%22%2C%22AIZ%22%2C%22T%22%2C%22ADSK%22%2C%22ADP%22%2C%22AN%22%2C%22AZO%22%2C%22AVGO%22%2C%22AVB%22%2C%22AVY%22%2C%22BHI%22%2C%22BLL%22%2C%22BAC%22%2C%22BK%22%2C%22BCR%22%2C%22BAX%22%2C%22BBT%22%2C%22BDX%22%2C%22BBBY%22%2C%22BRK%22%2C%22BBY%22%2C%22BIIB%22%2C%22BLK%22%2C%22HRB%22%2C%22BA%22%2C%22BWA%22%2C%22BXP%22%2C%22BSX%22%2C%22BMY%22%2C%22BF%22%2C%22CHRW%22%2C%22CA%22%2C%22COG%22%2C%22CPB%22%2C%22COF%22%2C%22CAH%22%2C%22HSIC%22%2C%22KMX%22%2C%22CCL%22%2C%22CAT%22%2C%22CBG%22%2C%22CBS%22%2C%22CELG%22%2C%22CNC%22%2C%22CNP%22%2C%22CTL%22%2C%22CERN%22%2C%22CF%22%2C%22SCHW%22%2C%22CHK%22%2C%22CVX%22%2C%22CMG%22%2C%22CB%22%2C%22CHD%22%2C%22CI%22%2C%22XEC%22%2C%22CINF%22%2C%22CTAS%22%2C%22CSCO%22%2C%22C%22%2C%22CTXS%22%2C%22CLX%22%2C%22CME%22%2C%22CMS%22%2C%22COH%22%2C%22KO%22%2C%22CTSH%22%2C%22CL%22%2C%22CPGX%22%2C%22CMCSA%22%2C%22CMA%22%2C%22CAG%22%2C%22CXO%22%2C%22COP%22%2C%22ED%22%2C%22STZ%22%2C%22GLW%22%2C%22COST%22%2C%22CCI%22%2C%22CSRA%22%2C%22CSX%22%2C%22CMI%22%2C%22CVS%22%2C%22DHI%22%2C%22DHR%22%2C%22DRI%22%2C%22DVA%22%2C%22DE%22%2C%22DLPH%22%2C%22DAL%22%2C%22XRAY%22%2C%22DVN%22%2C%22DO%22%2C%22DLR%22%2C%22DFS%22%2C%22DISCA%22%2C%22DISCK%22%2C%22DG%22%2C%22DLTR%22%2C%22D%22%2C%22DOV%22%2C%22DOW%22%2C%22DPS%22%2C%22DTE%22%2C%22DD%22%2C%22DUK%22%2C%22DNB%22%2C%22ETFC%22%2C%22EMN%22%2C%22ETN%22%2C%22EBAY%22%2C%22ECL%22%2C%22EIX%22%2C%22EW%22%2C%22EA%22%2C%22EMC%22%2C%22EMR%22%2C%22ENDP%22%2C%22ETR%22%2C%22EOG%22%2C%22EQT%22)&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=')
+    response1 = HTTParty.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22MMM%22%2C%22ABT%22%2C%22ABBV%22%2C%22ACN%22%2C%22ATVI%22%2C%22AYI%22%2C%22ADBE%22%2C%22AAP%22%2C%22AES%22%2C%22AET%22%2C%22AFL%22%2C%22AMG%22%2C%22A%22%2C%22GAS%22%2C%22APD%22%2C%22AKAM%22%2C%22ALK%22%2C%22AA%22%2C%22AGN%22%2C%22ALXN%22%2C%22ALLE%22%2C%22ADS%22%2C%22ALL%22%2C%22GOOGL%22%2C%22GOOG%22%2C%22MO%22%2C%22AMZN%22%2C%22AEE%22%2C%22AAL%22%2C%22AEP%22%2C%22AXP%22%2C%22AIG%22%2C%22AMT%22%2C%22AWK%22%2C%22AMP%22%2C%22ABC%22%2C%22AME%22%2C%22AMGN%22%2C%22APH%22%2C%22APC%22%2C%22ADI%22%2C%22AON%22%2C%22APA%22%2C%22AIV%22%2C%22AAPL%22%2C%22AMAT%22%2C%22ADM%22%2C%22AJG%22%2C%22AIZ%22%2C%22T%22%2C%22ADSK%22%2C%22ADP%22%2C%22AN%22%2C%22AZO%22%2C%22AVGO%22%2C%22AVB%22%2C%22AVY%22%2C%22BHI%22%2C%22BLL%22%2C%22BAC%22%2C%22BK%22%2C%22BCR%22%2C%22BAX%22%2C%22BBT%22%2C%22BDX%22%2C%22BBBY%22%2C%22BBY%22%2C%22BIIB%22%2C%22BLK%22%2C%22HRB%22%2C%22BA%22%2C%22BWA%22%2C%22BXP%22%2C%22BSX%22%2C%22BMY%22%2C%22CHRW%22%2C%22CA%22%2C%22COG%22%2C%22CPB%22%2C%22COF%22%2C%22CAH%22%2C%22HSIC%22%2C%22KMX%22%2C%22CCL%22%2C%22CAT%22%2C%22CBG%22%2C%22CBS%22%2C%22CELG%22%2C%22CNC%22%2C%22CNP%22%2C%22CTL%22%2C%22CERN%22%2C%22CF%22%2C%22SCHW%22%2C%22CHK%22%2C%22CVX%22%2C%22CMG%22%2C%22CB%22%2C%22CHD%22%2C%22CI%22%2C%22XEC%22%2C%22CINF%22%2C%22CTAS%22%2C%22CSCO%22%2C%22C%22%2C%22CTXS%22%2C%22CLX%22%2C%22CME%22%2C%22CMS%22%2C%22COH%22%2C%22KO%22%2C%22CTSH%22%2C%22CL%22%2C%22CPGX%22%2C%22CMCSA%22%2C%22CMA%22%2C%22CAG%22%2C%22CXO%22%2C%22COP%22%2C%22ED%22%2C%22STZ%22%2C%22GLW%22%2C%22COST%22%2C%22CCI%22%2C%22CSRA%22%2C%22CSX%22%2C%22CMI%22%2C%22CVS%22%2C%22DHI%22%2C%22DHR%22%2C%22DRI%22%2C%22DVA%22%2C%22DE%22%2C%22DLPH%22%2C%22DAL%22%2C%22XRAY%22%2C%22DVN%22%2C%22DO%22%2C%22DLR%22%2C%22DFS%22%2C%22DISCA%22%2C%22DISCK%22%2C%22DG%22%2C%22DLTR%22%2C%22D%22%2C%22DOV%22%2C%22DOW%22%2C%22DPS%22%2C%22DTE%22%2C%22DD%22%2C%22DUK%22%2C%22DNB%22%2C%22ETFC%22%2C%22EMN%22%2C%22ETN%22%2C%22EBAY%22%2C%22ECL%22%2C%22EIX%22%2C%22EW%22%2C%22EA%22%2C%22EMC%22%2C%22EMR%22%2C%22ENDP%22%2C%22ETR%22%2C%22EOG%22%2C%22EQT%22)&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=')
     quotes1 = response1["query"]["results"]["quote"]
     # puts quotes1
     create_stocks(quotes1)
@@ -32,7 +32,7 @@ class StocksController < ApplicationController
   end
 
   def update_all  
-    response1 = HTTParty.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22MMM%22%2C%22ABT%22%2C%22ABBV%22%2C%22ACN%22%2C%22ATVI%22%2C%22AYI%22%2C%22ADBE%22%2C%22AAP%22%2C%22AES%22%2C%22AET%22%2C%22AFL%22%2C%22AMG%22%2C%22A%22%2C%22GAS%22%2C%22APD%22%2C%22AKAM%22%2C%22ALK%22%2C%22AA%22%2C%22AGN%22%2C%22ALXN%22%2C%22ALLE%22%2C%22ADS%22%2C%22ALL%22%2C%22GOOGL%22%2C%22GOOG%22%2C%22MO%22%2C%22AMZN%22%2C%22AEE%22%2C%22AAL%22%2C%22AEP%22%2C%22AXP%22%2C%22AIG%22%2C%22AMT%22%2C%22AWK%22%2C%22AMP%22%2C%22ABC%22%2C%22AME%22%2C%22AMGN%22%2C%22APH%22%2C%22APC%22%2C%22ADI%22%2C%22AON%22%2C%22APA%22%2C%22AIV%22%2C%22AAPL%22%2C%22AMAT%22%2C%22ADM%22%2C%22AJG%22%2C%22AIZ%22%2C%22T%22%2C%22ADSK%22%2C%22ADP%22%2C%22AN%22%2C%22AZO%22%2C%22AVGO%22%2C%22AVB%22%2C%22AVY%22%2C%22BHI%22%2C%22BLL%22%2C%22BAC%22%2C%22BK%22%2C%22BCR%22%2C%22BAX%22%2C%22BBT%22%2C%22BDX%22%2C%22BBBY%22%2C%22BRK%22%2C%22BBY%22%2C%22BIIB%22%2C%22BLK%22%2C%22HRB%22%2C%22BA%22%2C%22BWA%22%2C%22BXP%22%2C%22BSX%22%2C%22BMY%22%2C%22BF%22%2C%22CHRW%22%2C%22CA%22%2C%22COG%22%2C%22CPB%22%2C%22COF%22%2C%22CAH%22%2C%22HSIC%22%2C%22KMX%22%2C%22CCL%22%2C%22CAT%22%2C%22CBG%22%2C%22CBS%22%2C%22CELG%22%2C%22CNC%22%2C%22CNP%22%2C%22CTL%22%2C%22CERN%22%2C%22CF%22%2C%22SCHW%22%2C%22CHK%22%2C%22CVX%22%2C%22CMG%22%2C%22CB%22%2C%22CHD%22%2C%22CI%22%2C%22XEC%22%2C%22CINF%22%2C%22CTAS%22%2C%22CSCO%22%2C%22C%22%2C%22CTXS%22%2C%22CLX%22%2C%22CME%22%2C%22CMS%22%2C%22COH%22%2C%22KO%22%2C%22CTSH%22%2C%22CL%22%2C%22CPGX%22%2C%22CMCSA%22%2C%22CMA%22%2C%22CAG%22%2C%22CXO%22%2C%22COP%22%2C%22ED%22%2C%22STZ%22%2C%22GLW%22%2C%22COST%22%2C%22CCI%22%2C%22CSRA%22%2C%22CSX%22%2C%22CMI%22%2C%22CVS%22%2C%22DHI%22%2C%22DHR%22%2C%22DRI%22%2C%22DVA%22%2C%22DE%22%2C%22DLPH%22%2C%22DAL%22%2C%22XRAY%22%2C%22DVN%22%2C%22DO%22%2C%22DLR%22%2C%22DFS%22%2C%22DISCA%22%2C%22DISCK%22%2C%22DG%22%2C%22DLTR%22%2C%22D%22%2C%22DOV%22%2C%22DOW%22%2C%22DPS%22%2C%22DTE%22%2C%22DD%22%2C%22DUK%22%2C%22DNB%22%2C%22ETFC%22%2C%22EMN%22%2C%22ETN%22%2C%22EBAY%22%2C%22ECL%22%2C%22EIX%22%2C%22EW%22%2C%22EA%22%2C%22EMC%22%2C%22EMR%22%2C%22ENDP%22%2C%22ETR%22%2C%22EOG%22%2C%22EQT%22)&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=')
+    response1 = HTTParty.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22MMM%22%2C%22ABT%22%2C%22ABBV%22%2C%22ACN%22%2C%22ATVI%22%2C%22AYI%22%2C%22ADBE%22%2C%22AAP%22%2C%22AES%22%2C%22AET%22%2C%22AFL%22%2C%22AMG%22%2C%22A%22%2C%22GAS%22%2C%22APD%22%2C%22AKAM%22%2C%22ALK%22%2C%22AA%22%2C%22AGN%22%2C%22ALXN%22%2C%22ALLE%22%2C%22ADS%22%2C%22ALL%22%2C%22GOOGL%22%2C%22GOOG%22%2C%22MO%22%2C%22AMZN%22%2C%22AEE%22%2C%22AAL%22%2C%22AEP%22%2C%22AXP%22%2C%22AIG%22%2C%22AMT%22%2C%22AWK%22%2C%22AMP%22%2C%22ABC%22%2C%22AME%22%2C%22AMGN%22%2C%22APH%22%2C%22APC%22%2C%22ADI%22%2C%22AON%22%2C%22APA%22%2C%22AIV%22%2C%22AAPL%22%2C%22AMAT%22%2C%22ADM%22%2C%22AJG%22%2C%22AIZ%22%2C%22T%22%2C%22ADSK%22%2C%22ADP%22%2C%22AN%22%2C%22AZO%22%2C%22AVGO%22%2C%22AVB%22%2C%22AVY%22%2C%22BHI%22%2C%22BLL%22%2C%22BAC%22%2C%22BK%22%2C%22BCR%22%2C%22BAX%22%2C%22BBT%22%2C%22BDX%22%2C%22BBBY%22%2C%22BBY%22%2C%22BIIB%22%2C%22BLK%22%2C%22HRB%22%2C%22BA%22%2C%22BWA%22%2C%22BXP%22%2C%22BSX%22%2C%22BMY%22%2C%22CHRW%22%2C%22CA%22%2C%22COG%22%2C%22CPB%22%2C%22COF%22%2C%22CAH%22%2C%22HSIC%22%2C%22KMX%22%2C%22CCL%22%2C%22CAT%22%2C%22CBG%22%2C%22CBS%22%2C%22CELG%22%2C%22CNC%22%2C%22CNP%22%2C%22CTL%22%2C%22CERN%22%2C%22CF%22%2C%22SCHW%22%2C%22CHK%22%2C%22CVX%22%2C%22CMG%22%2C%22CB%22%2C%22CHD%22%2C%22CI%22%2C%22XEC%22%2C%22CINF%22%2C%22CTAS%22%2C%22CSCO%22%2C%22C%22%2C%22CTXS%22%2C%22CLX%22%2C%22CME%22%2C%22CMS%22%2C%22COH%22%2C%22KO%22%2C%22CTSH%22%2C%22CL%22%2C%22CPGX%22%2C%22CMCSA%22%2C%22CMA%22%2C%22CAG%22%2C%22CXO%22%2C%22COP%22%2C%22ED%22%2C%22STZ%22%2C%22GLW%22%2C%22COST%22%2C%22CCI%22%2C%22CSRA%22%2C%22CSX%22%2C%22CMI%22%2C%22CVS%22%2C%22DHI%22%2C%22DHR%22%2C%22DRI%22%2C%22DVA%22%2C%22DE%22%2C%22DLPH%22%2C%22DAL%22%2C%22XRAY%22%2C%22DVN%22%2C%22DO%22%2C%22DLR%22%2C%22DFS%22%2C%22DISCA%22%2C%22DISCK%22%2C%22DG%22%2C%22DLTR%22%2C%22D%22%2C%22DOV%22%2C%22DOW%22%2C%22DPS%22%2C%22DTE%22%2C%22DD%22%2C%22DUK%22%2C%22DNB%22%2C%22ETFC%22%2C%22EMN%22%2C%22ETN%22%2C%22EBAY%22%2C%22ECL%22%2C%22EIX%22%2C%22EW%22%2C%22EA%22%2C%22EMC%22%2C%22EMR%22%2C%22ENDP%22%2C%22ETR%22%2C%22EOG%22%2C%22EQT%22)&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=')
     quotes1 = response1["query"]["results"]["quote"]
     update_stocks(quotes1)
 
@@ -46,32 +46,80 @@ class StocksController < ApplicationController
     
     redirect_to '/stocks'
   end
+#####NOTES FOR REFINING SEARCH
+    # @stocks = @stocks.where('something')
+    # @stocks = @stocks.where('something')
+    # @stocks = @stocks.where('something')
+    # search_string = "Stock"
+    # @stocks.where('something').where('something').where('something')
 
+    # unless params[:otherColum] == "Any"
+    #   @stocks = @stocks.where('something else')
+    # end
+#####
   def search
     # fail
-    search_string = "Stock"
-    if params[:prmin]
-      str = ".where(LastTradePriceOnly > #{params[:prmin]})"
-      # str = "all"
-      search_string += str
+    @stocks = Stock.all
+    unless params[:prmin] == ""
+      @stocks = @stocks.where("\"LastTradePriceOnly\" > ?", params[:prmin].to_f )
     end
-    # # if params[:sharepricemin]
-    # #   str = ".where(shareprice > #{params[:sharepricemin]}"
-    # #   search_string += str
-    # # end
-    # # if params[:sharepricemin]
-    # #   str = ".where(shareprice > #{params[:sharepricemin]}"
-    # #   search_string += str
-    # # end
-    # render text: search_string
-    # array = [search_string]
-    # @stocks = array.each { |method| Stock.send(method) }
-    @stocks = search_string.parameterize
+    unless params[:prmax] == ""
+      @stocks = @stocks.where("\"LastTradePriceOnly\" < ?", params[:prmax].to_f )
+    end
+
+
+
+    unless params[:mcmin] == ""
+      @stocks = @stocks.where("\"MarketCapNumber\" > ?", params[:mcmin] )
+    end
+    unless params[:mcmax] == ""
+      @stocks = @stocks.where("\"MarketCapNumber\" < ?", params[:mcmax] )
+    end
+
+    unless params[:dvymin] == ""
+      @stocks = @stocks.where("\"DividendYield\" > ?", params[:dvymin] )
+    end
+
+    unless params[:dvymax] == ""
+      @stocks = @stocks.where("\"DividendYield\" < ?", params[:dvymax] )
+    end
+
+    unless params[:pemin] == ""
+      @stocks = @stocks.where("\"PERatio\" > ?", params[:pemin] )
+    end
+    unless params[:pemax] == ""
+      @stocks = @stocks.where("\"PERatio\" < ?", params[:pemax] )
+    end
+
+    unless params[:pbmin] == ""
+      @stocks = @stocks.where("\"PriceBook\" > ?", params[:pbmin] )
+    end
+
+    unless params[:pbmax] == ""
+      @stocks = @stocks.where("\"PriceBook\" < ?", params[:pbmax] )
+    end
+
+    unless params[:psmin] == ""
+      @stocks = @stocks.where("\"PriceSales\" > ?", params[:psmin] )
+    end
+
+     unless params[:psmax] == ""
+      @stocks = @stocks.where("\"PriceSales\" < ?", params[:psmax] )
+    end
+
+     unless params[:pegmin] == ""
+      @stocks = @stocks.where("\"PEGRatio\" > ?", params[:pegmin] )
+    end
+     unless params[:pegmax] == ""
+      @stocks = @stocks.where("\"PEGRatio\" < ?", params[:pegmax] )
+    end
+
+    # unless params[:gr] == ""
+    #   @stocks = @stocks.where("\"LastTradePriceOnly\" < ?", params[:prmax].to_f )
+    # end
+   
   end
 
-  def screen
-    
-  end
 
   private
   def stock_params
@@ -91,6 +139,10 @@ class StocksController < ApplicationController
 
   def create_stocks arr
     arr.each do |s|
+      estimate1 = s['EPSEstimateNextYear'].to_f
+      estimate2 = s['EPSEstimateCurrentYear'].to_f
+      diff = estimate1 - estimate2
+      estimate_result = diff / estimate2
 
       Stock.create(
         symbol:  s['symbol'],
@@ -134,8 +186,8 @@ class StocksController < ApplicationController
         YearRange:s['YearRange'], 
         DividendYield:s['DividendYield'], 
         PercentChange:s['PercentChange'],
-        MarketCapNumber: convert_billions_millions(s['MarketCapitalization']) #,
-        # EstimatedOneYearEPSGrowth: ((s['EPSEstimateNextYear'].to_f / s['EPSEstimateCurrentYear'].to_f) - 1 )
+        MarketCapNumber: convert_billions_millions(s['MarketCapitalization']),
+        EstimatedOneYearEPSGrowth: estimate_result        
         ) 
     end
   end
@@ -145,8 +197,8 @@ class StocksController < ApplicationController
       estimate1 = s['EPSEstimateNextYear'].to_f
       estimate2 = s['EPSEstimateCurrentYear'].to_f
       diff = estimate1 - estimate2
-
       estimate_result = diff / estimate2
+
       Stock.find_by(symbol: s['symbol']).update(
         AverageDailyVolume: s['AverageDailyVolume'],
         BookValue:s['BookValue'], 

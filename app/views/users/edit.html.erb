@@ -1,2 +1,56 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="row">
+		<div class="columns five">
+			<h3>Update your Profile! </h3>
+		</div>
+		<div class="columns seven ">
+
+			<i class="fa fa-list" aria-hidden="true"></i> <a href="/stocks">All Stocks</a> | 
+			<i class="fa fa-search" aria-hidden="true"></i> <a href="/screener">Stock Screener</a> | 
+			<i class="fa fa-eye" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>">Watch List</a> | <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+			<i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/sessions" data-method="delete">Logout</a>   
+		</div>
+</div>
+
+<!-- <div class="row">
+	<div class="columns ten">
+		<form action="/users/<%= @user.id %>" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="hidden" name="_method" value="patch">
+
+			<label for="first_name">First Name</label>
+			<input id="first_name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+
+			<label for="last_name">Last Name</label>
+			<input id="last_name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
+
+			<label for="email">Email</label>
+			<input id="email" type="email" name="user[email]" value="<%= @user.email %>">
+
+			<label>Avatar</label>
+			<input type="file" name="user[avatar]">
+			<br/>
+			<button type="submit" class="button-danger">Update</button>
+		</form>
+	</div>
+</div> -->
+ <div class="row">
+	<div class="columns four">
+		<%= form_for @user, :url => url_for(:action => 'update', :controller => 'users'), :html => {:multipart => true} do |form| %>
+		  <%= form.label :first_name %>
+		  <%= form.text_field :first_name %>
+		  <%= form.label :last_name %>
+		  <%= form.text_field :last_name %>
+		  <%= form.label :email %>
+		  <%= form.text_field :email %>
+		  <%= form.label :avatar %>
+		  <%= form.file_field :avatar %>
+		  <br>
+		  <%= form.submit :submit, { class: "button-danger"}%>
+		<% end %>
+	</div>
+	<div class="columns four">
+		<% if @user.avatar.file? %>
+	      <%= image_tag @user.avatar.url %>
+		<% end %>	
+	</div>
+</div>

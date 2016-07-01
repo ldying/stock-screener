@@ -1,4 +1,65 @@
-<h1>Stocks#search</h1>
-<p>Find me in app/views/stocks/search.html.erb</p>
-<%= @stocks.first %>
-<%= @stocks.last %>
+<div class="row">
+		<div class="columns five">
+			<h3>Screener Results!</h3>
+		</div>
+		<div class="columns seven ">
+
+			<i class="fa fa-list" aria-hidden="true"></i> <a href="/stocks">All Stocks</a> | 
+			<i class="fa fa-search" aria-hidden="true"></i> <a href="/screener">Stock Screener</a> | 
+			<i class="fa fa-eye" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>">Watch List</a> | <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+			<i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/sessions" data-method="delete">Logout</a>   
+		</div>
+</div>
+<div class="row">
+	<div class="columns twelve">
+		<table class="u-full-width">
+			<thead>
+				<tr>
+					<th>Symbol</th>
+					<th>Price</th>
+					<th>Change</th>
+					<th>P/E</th>
+					<th>Volume</th>
+					<th>Dividend Yield</th>
+					<th>Market Cap</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @stocks.each do  |stock|%>
+				<tr>
+					<td><i class="fa fa-area-chart" aria-hidden="true"></i> <a href="/stocks/<%= stock.id %>" data-no-turbolink="true"><%= stock.symbol%></a></td>
+					<td><%= stock.LastTradePriceOnly%></td>
+					<td 
+					<% if stock.Change and stock.Change[0] == "+" %>
+						style="color:green;"
+						<% else %>
+						style="color:red;"
+						<% end %>
+					><%= stock.Change%> &nbsp;&nbsp;/&nbsp;&nbsp;<%= stock.PercentChange%></td>
+					<td><%= stock.PERatio %></td>
+					<td><%= stock.Volume%></td>
+					<td><%= stock.DividendYield %>%</td>
+					<td><%= stock.MarketCapitalization%></td>
+					<td>
+						<% if stock.users.include? current_user %>
+							<form action="/follows/<%= stock.follows.where(user: current_user).first.id %>" method="post">
+								<input type="hidden" name="_method" value="delete">
+								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+								<button type="submit" class="button-danger" value=""><i class="fa fa-eye-slash" aria-hidden="true"></i> Unfollow</button>
+							</form>
+						<% else %>
+							<form action="/follows" method="post">
+								<input type="hidden" name="stock_id" value="<%= stock.id %>">
+								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+								<button type="submit" class="button-primary" value=""><i class="fa fa-eye" aria-hidden="true"></i> Follow</button>
+							</form>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+
+</div>

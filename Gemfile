@@ -29,7 +29,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'spring',        group: :development
 gem 'rename'
 gem 'httparty'
-
+gem "paperclip", "~> 4.2"
+gem "cocaine", "= 0.5.8"
 # Use Unicorn as the app server
 # gem 'unicorn'
 

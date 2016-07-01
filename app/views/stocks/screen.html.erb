@@ -1,8 +1,20 @@
+<div class="row">
+		<div class="columns five">
+			<h3><i class="fa fa-search" aria-hidden="true"></i> Stock Screener! </h3>
+		</div>
+		<div class="columns seven ">
+
+			<i class="fa fa-list" aria-hidden="true"></i> <a href="/stocks">All Stocks</a> | 
+			<i class="fa fa-search" aria-hidden="true"></i> <a href="/screener">Stock Screener</a> | 
+			<i class="fa fa-eye" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>">Watch List</a> | <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="/users/<%=current_user.id%>/edit">Edit Profile</a> | 
+			<i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/sessions" data-method="delete">Logout</a>   
+		</div>
+</div>
 <form action="/search">
   <table border="0" cellpadding="2" cellspacing="0" width="100%">
     <tbody>
-      <tr bgcolor="dcdcdc">
-      	<td><font face="arial"><b>Screener Settings</b></font></td>
+      <tr bgcolor="1f94c6">
+      	<td class="center-align"><font face="arial"><b><i class="fa fa-cogs" aria-hidden="true"></i> Screener Settings</b></font></td>
       </tr>
     </tbody>
   </table>
@@ -14,8 +26,8 @@ the "Find Stocks" button to view the results.</font>
 	<table border="0" cellpadding="2" cellspacing="0" width="100%">
 		<tbody>
 			<tr>
-				<td colspan="3" bgcolor="eeeeee">
-					<font face="arial"><b>Share Data</b></font>
+				<td colspan="3" bgcolor="27b2e5" class="center-align">
+					<font face="arial"><b><i class="fa fa-database" aria-hidden="true"></i> Share Data</b></font>
 				</td>
 			</tr>
 			<tr>
@@ -125,7 +137,7 @@ the "Find Stocks" button to view the results.</font>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" bgcolor="eeeeee"><font face="arial"><b>Valuation Ratios</b></font></td>
+				<td colspan="3" bgcolor="27b2e5" class="center-align"><font face="arial"><b><i class="fa fa-pie-chart" aria-hidden="true"></i> Valuation Ratios</b></font></td>
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;<font face="arial" size="-1">Price/Earnings Ratio:</font></td>
@@ -265,8 +277,8 @@ the "Find Stocks" button to view the results.</font>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" bgcolor="eeeeee">
-					<font face="arial"><b>Analyst Estimates</b></font>
+				<td colspan="3" bgcolor="27b2e5" class="center-align">
+					<font face="arial"><b><i class="fa fa-line-chart" aria-hidden="true"></i> Analyst Estimates</b></font>
 				</td>
 			</tr>
 			<tr>
@@ -346,12 +358,13 @@ the "Find Stocks" button to view the results.</font>
 				</td>
 			</tr> -->
 			<tr>
-				<td></td>
-				<td></td>
-				<td colspan="3" align="center"><br>
+				<!-- <td></td> -->
+				
+				<td colspan="3" class="center-align"><br>
 					<input name="db" value="stocks" type="hidden">
-					<input class="button-success center-align"value="Find Stocks" type="submit">
+					<button type="submit" class="button-primary" value=""><i class="fa fa-search" aria-hidden="true"></i> Find Stocks</button>
 				</td>
+				<!-- <td></td> -->
 			</tr>
 		</tbody>
 	</table>
